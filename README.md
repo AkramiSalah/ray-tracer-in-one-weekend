@@ -1,4 +1,4 @@
-# path-tracer
+# Ray Tracing In One Weekend
 ---
 ## this is a WOP.
 
