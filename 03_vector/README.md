@@ -34,3 +34,10 @@ i stumbled on this while trying to avoid writing `template<typename T>`
 before every externally defined function. turns out it also has real benefits
 as a side effect: operators only resolve for `vec3` types via ADL, and they
 don't pollute the global namespace until actually needed.
+
+## things i researched while working on this:
+- hidden friends idiom
+- argument dependent lookup
+- type traits
+- plain old data structures
+
