@@ -6,7 +6,7 @@
 
 
 template<typename T>
-constexpr double SCALE_FACTOR = static_cast<T>(255.999);
+static constexpr double SCALE_FACTOR = static_cast<T>(255.999);
 
 template<typename T>
 using color = vec3<T>;
