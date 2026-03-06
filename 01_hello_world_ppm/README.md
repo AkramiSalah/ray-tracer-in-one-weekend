@@ -1,5 +1,5 @@
 # Chapter 1
-this is a small CLI program that creates a green red gradient of a user specified size.
+this is a small CLI program that creates a green red gradient of a user-specified size.
 the output format is PPM.
 
 ## Building
