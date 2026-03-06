@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <cassert>
 
 template<typename T>
 struct vec3{
@@ -10,7 +11,7 @@ struct vec3{
     T e[VECTOR_SIZE];
 
     vec3() : e{ ZERO, ZERO, ZERO }{}
-    vec3(T e0, T e1, T e2) e{e0, e1, e2}{}
+    vec3(T e0, T e1, T e2) : e{e0, e1, e2}{}
     explicit vec3(T scalar) : e{scalar,scalar,scalar}{}
 
     vec3(const vec3& other) = default;
@@ -24,7 +25,7 @@ struct vec3{
     T y() const { return e[1]; }
     T z() const { return e[2]; }
 
-    vec3 operator-(const vec3& other){
+    vec3 operator-() const{
         return vec3(-e[0], -e[1], -e[2]);
     }
 
@@ -59,7 +60,7 @@ struct vec3{
     }
 
     T length() const{
-        std::sqrt(length_squared());
+        return std::sqrt(length_squared());
     }
 
 
@@ -74,7 +75,7 @@ struct vec3{
     }
 
     friend vec3 operator-(vec3 lhs, const vec3& rhs){
-        return lhs - rhs;
+        return lhs + (-rhs);
     }
 
     friend vec3 operator*(vec3 lhs, const T& scalar){
@@ -92,7 +93,7 @@ struct vec3{
         return lhs;
     }
 
-    friend vec3 operator/(const vec3& lhs, T scalar) {
+    friend vec3 operator/(const vec3& v, T scalar) {
         assert(scalar != ZERO);
         return (1/scalar) * v;
     }
@@ -100,10 +101,10 @@ struct vec3{
     friend T dot(const vec3& lhs, const vec3& rhs){
         T res = ZERO;
         for (int i = 0; i < VECTOR_SIZE; ++i) res += lhs[i] * rhs[i];
-               lhs[2] * rhs[2];
+        return res;
     }
 
-    friend T vec3 cross(const vec3& lhs, const vec3& rhs){
+    friend vec3 cross(const vec3& lhs, const vec3& rhs){
         return vec3(
             lhs[1] * rhs[2] - lhs[2] * rhs[1],
             lhs[2] * rhs[0] - lhs[0] * rhs[2],
