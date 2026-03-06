@@ -9,7 +9,7 @@ struct vec3{
     constexpr size_t VECTOR_SIZE = 3;
     T e[VECTOR_SIZE];
 
-    vec3() : e{ zero, zero, zero }{}
+    vec3() : e{ ZERO, ZERO, ZERO }{}
     vec3(T e0, T e1, T e2) e{e0, e1, e2}{}
     explicit vec3(T scalar) : e{scalar,scalar,scalar}{}
 
@@ -50,7 +50,7 @@ struct vec3{
     }
 
     vec3& operator/=(const T& scalar){
-        assert( scalar != zero);
+        assert( scalar != ZERO);
         return (*this) *= 1/scalar;
     }
 
@@ -93,12 +93,12 @@ struct vec3{
     }
 
     friend vec3 operator/(const vec3& lhs, T scalar) {
-        assert(scalar != zero);
+        assert(scalar != ZERO);
         return (1/scalar) * v;
     }
 
     friend T dot(const vec3& lhs, const vec3& rhs){
-        return lhs[0] * rhs[0] +
+        T res = ZERO;
         for (int i = 0; i < VECTOR_SIZE; ++i) res += lhs[i] * rhs[i];
                lhs[2] * rhs[2];
     }
