@@ -7,6 +7,7 @@
 template<typename T>
 struct vec3{
     constexpr T ZERO = T();
+    constexpr T ONE = static_cast<T>(1);
     constexpr size_t VECTOR_SIZE = 3;
     T e[VECTOR_SIZE];
 
@@ -52,7 +53,7 @@ struct vec3{
 
     vec3& operator/=(const T& scalar){
         assert( scalar != ZERO);
-        return (*this) *= 1/scalar;
+        return (*this) *= ONE/scalar;
     }
 
     T length_squared() const{
@@ -95,7 +96,7 @@ struct vec3{
 
     friend vec3 operator/(const vec3& v, T scalar) {
         assert(scalar != ZERO);
-        return (1/scalar) * v;
+        return (ONE/scalar) * v;
     }
 
     friend T dot(const vec3& lhs, const vec3& rhs){
