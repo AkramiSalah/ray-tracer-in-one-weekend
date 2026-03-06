@@ -5,8 +5,9 @@
 
 template<typename T>
 struct vec3{
-    T e[3];
-    constexpr zero = T();
+    constexpr T ZERO = T();
+    constexpr size_t VECTOR_SIZE = 3;
+    T e[VECTOR_SIZE];
 
     vec3() : e{ zero, zero, zero }{}
     vec3(T e0, T e1, T e2) e{e0, e1, e2}{}
@@ -17,7 +18,7 @@ struct vec3{
     ~vec3() = default;
 
     T* begin(){return e;}
-    T* end(){return e + 3;}
+    T* end(){return e + VECTOR_SIZE;}
 
     T x() const { return e[0]; }
     T y() const { return e[1]; }
@@ -29,26 +30,22 @@ struct vec3{
 
     const T& operator[](size_t index) const{
         // no safety checks because we need speed.
-        assert(index < 3);
+        assert(index < VECTOR_SIZE);
         return e[index];
     }
 
     T& operator[](size_t index){
-        assert(index < 3);
+        assert(index < VECTOR_SIZE);
         return e[index];
     }
 
     vec3& operator+=(const vec3& other){
-        e[0] += other[0]
-        e[1] += other[1]
-        e[2] += other[2]
+        for (int i = 0; i < VECTOR_SIZE; ++i) e[i] += other.e[i];
         return *this;
     }
 
     vec3& operator*=(const T& scalar){
-        e[0] *= scalar;
-        e[1] *= scalar;
-        e[2] *= scalar;
+        for (int i = 0; i < VECTOR_SIZE; ++i) e[i] *= scalar;
         return *this;
     }
 
@@ -91,9 +88,7 @@ struct vec3{
     // this is a hadamard/schur product!
     // it has been chosen as the default * becasue itll be used alot in the future.
     friend vec3 operator*(vec3 lhs, const vec3& rhs){
-        lhs[0] *= rhs[0];
-        lhs[1] *= rhs[1];
-        lhs[2] *= rhs[2];
+        for (int i = 0; i < VECTOR_SIZE; ++i) lhs[i] *= rhs[i];
         return lhs;
     }
 
@@ -104,7 +99,7 @@ struct vec3{
 
     friend T dot(const vec3& lhs, const vec3& rhs){
         return lhs[0] * rhs[0] +
-               lhs[1] * rhs[1] +
+        for (int i = 0; i < VECTOR_SIZE; ++i) res += lhs[i] * rhs[i];
                lhs[2] * rhs[2];
     }
 
