@@ -13,9 +13,9 @@ using color = vec3<T>;
 
 template<typename T>
 void write_color(std::ostream& out, const color<T>& pixel_color){
-    auto r = pixel_color.x();
-    auto g = pixel_color.y();
-    auto b = pixel_color.z();
+    auto r = std::clamp(pixel_color.x(), vec3<T>::ZERO, vec3<T>::ONE);
+    auto g = std::clamp(pixel_color.y(), vec3<T>::ZERO, vec3<T>::ONE);
+    auto b = std::clamp(pixel_color.z(), vec3<T>::ZERO, vec3<T>::ONE);
 
     int rbyte = static_cast<int>(SCALE_FACTOR<T> * r);
     int gbyte = static_cast<int>(SCALE_FACTOR<T> * g);
