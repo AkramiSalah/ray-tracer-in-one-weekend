@@ -120,6 +120,8 @@ struct vec3{
         return v / v.length();
     }
 
+    static constexpr vec3 zero() { return vec3(ZERO, ZERO, ZERO); }
+
     static constexpr vec3 xhat() { return vec3(ONE, ZERO, ZERO); }
     static constexpr vec3 yhat() { return vec3(ZERO, ONE, ZERO); }
     static constexpr vec3 zhat() { return vec3(ZERO, ZERO, ONE); }
