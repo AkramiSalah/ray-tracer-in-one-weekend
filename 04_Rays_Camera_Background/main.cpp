@@ -20,6 +20,7 @@ int main(int argc, char** argv){
 
     int image_width = (argc >= 3) ? std::stoi(argv[2]) : DEFAULT_IMAGE_SIZE;
     int image_height = (argc >= 4) ? std::stoi(argv[3]) : image_width;
+    
     std::ofstream image(argv[1]);
     if (!image) {
         std::cerr << "Error: Could not open file " << argv[1] << "\n";

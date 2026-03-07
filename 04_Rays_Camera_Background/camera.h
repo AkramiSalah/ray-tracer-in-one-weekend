@@ -40,6 +40,4 @@ private:
     Vec3 look_dir;
     Viewport vp;
 
-};
-
-    
+};   
