@@ -6,7 +6,7 @@ class Viewport{
 public:
     static constexpr Float VP_HEIGHT = Float(2.0);
 
-    constexpr Viewport(const Point3& cam_pos, const Vec3& look_dir, Float focal_length, Float aspect_ratio){
+    Viewport(const Point3& cam_pos, const Vec3& look_dir, Float focal_length, Float aspect_ratio){
         
         u_vec = Vec3(VP_HEIGHT * aspect_ratio, Float(0), Float(0));
         v_vec = Vec3(Float(0), -VP_HEIGHT, Float(0));  
