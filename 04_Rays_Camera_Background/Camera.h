@@ -1,24 +1,18 @@
 #pragma once
-#include "ray.h"
-#include "viewport.h"
+#include "Ray.h"
+#include "Viewport.h"
+#include "../Float.h"
 
-template<typename T>
-class camera
-{
+
+class Camera{
 public:
-    using Point3 = point3<T>;
-    using Vec3   = vec3<T>;
-    using Ray    = ray<T>;
-    using Viewport = viewport<T>;
-
-    static constexpr T ZERO = T();
 
     static constexpr Point3 DEFAULT_POSITION = Point3(ZERO, ZERO, ZERO);
-    static constexpr T DEFAULT_FOCAL_LENGTH = T(1);
-    static constexpr T DEFAULT_ASCPECT_RATIO = T(16)/T(9);
+    static constexpr Float DEFAULT_FOCAL_LENGTH = ONE;
+    static constexpr Float DEFAULT_ASCPECT_RATIO = Float(16)/Float(9);
     
     // Note: the aspect_ratio should be the real one, not the ideal one!
-    camera(const Point3& position, T focal_length, T aspect_ratio) : 
+    Camera(const Point3& position, Float focal_length, Float aspect_ratio) : 
         position(position), look_dir(-Vec3::zhat()),
         vp(
             position,
@@ -27,10 +21,10 @@ public:
             aspect_ratio
         ){}
     
-    camera() : camera(DEFAULT_POSITION, DEFAULT_FOCAL_LENGTH, DEFAULT_ASCPECT_RATIO){}
+    Camera() : Camera(DEFAULT_POSITION, DEFAULT_FOCAL_LENGTH, DEFAULT_ASCPECT_RATIO){}
 
     
-    Ray get_ray(T u, T v) const{
+    Ray get_ray(Float u, Float v) const{
         auto point_on_vp = vp.get_point(u,v);
         return Ray(position, unit_vector(point_on_vp - position));
     }

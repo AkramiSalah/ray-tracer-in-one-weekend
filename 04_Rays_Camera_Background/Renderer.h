@@ -1,23 +1,19 @@
 #pragma once
-#include "camera.h"
-#include "ray.h"
-#include "../03_vector/color.h"
+#include "Camera.h"
+#include "Ray.h"
+#include "../03_vector/Color.h"
+#include "../Float.h"
 #include <iostream>
 
-template<typename T>
-class renderer{
+class Renderer{
 public:
-    using Camera = camera<T>;
-    using Ray = ray<T>;
-    using Point3 = point3<T>;
-    using Color = color<T>;
 
-    renderer( unsigned int image_width, unsigned int image_height, T focal_length):
+    Renderer( unsigned int image_width, unsigned int image_height, Float focal_length):
         image_width(image_width), image_height(image_height),
         cam(
             Point3::zero(),
             focal_length,
-            T(image_width)/T(image_height)
+            Float(image_width)/Float(image_height)
         )
     {}
 
@@ -26,8 +22,8 @@ public:
         for(int y = 0; y < image_height; y++){
             std::clog << "\rScanlines remaining: " << (image_height - y) << ' ' << std::flush;
             for (int x = 0; x < image_width; x++) {
-                T u = T(x) / T(image_width - 1);
-                T v = T(y) / T(image_height - 1);
+                Float u = Float(x) / Float(image_width - 1);
+                Float v = Float(y) / Float(image_height - 1);
                 Ray r = cam.get_ray(u, v);
                 Color pixel_color = ray_color(r);
                 write_color(os, pixel_color);
@@ -42,9 +38,9 @@ private:
     Camera cam;
 
     Color ray_color(const Ray& r) const {
-        vec3 unit_direction = unit_vector(r.direction());
-        auto a = 0.5*(unit_direction.y() + 1.0);
-        return (1.0-a)*Color(1.0, 1.0, 1.0) + a*Color(0.5, 0.7, 1.0);
+        Vec3 unit_direction = unit_vector(r.direction());
+        auto a = Float(0.5)*(unit_direction.y() + ONE);
+        return (ONE-a)*Color(ONE, ONE, ONE) + a*Color(Float(0.5), Float(0.7), ONE);
     }
 };
 
