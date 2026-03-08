@@ -1,4 +1,5 @@
-#include "renderer.h"
+#include "Renderer.h"
+#include "../Float.h"
 
 #include <iostream>
 #include <fstream>
@@ -27,6 +28,6 @@ int main(int argc, char** argv){
         return 1;
     }
 
-   renderer<double> ren(image_width, image_height, 1.0);
-   ren.render(image);
+   Renderer renderer(image_width, image_height, ONE);
+   renderer.render(image);
 }
