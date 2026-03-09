@@ -58,5 +58,15 @@ maybe i should just follow the author and dump it all in my main.
 but maybe this doesnt matter,
 the goal was to read the book, follow along, but try to make better design choices.
 
-TODO:
+# Possible TODOs:
 [] answer the question: was this a waste of time? should i have dumped all the code in the main like the author? am i over engineering for no reason again?
+
+[] leverage parallel computation of pixel colors in the render fucntion to squeeze out more performance
+
+[] find out how to run the parallalized render function on the GPU instead of the CPU (without using OPENGL and its shaders.)
+
+# Observations:
+
+out of order exec might be useful in the render function,
+but the ppm format requires sequential writing, so either find a format where parallel writing is easy
+or write to a pixel array/matrix/vector in parallel and then write to the file sequentially.
