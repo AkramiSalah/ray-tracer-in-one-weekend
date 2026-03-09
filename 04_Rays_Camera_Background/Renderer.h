@@ -18,6 +18,10 @@ public:
     {}
 
     void render(std::ostream& os) const{
+        // note to self:
+        // out of order exec might be useful here, might gain alot of performance here.
+        // but the ppm format requires sequential writing, so either find a format where parallel writing is easy
+        // or write to a pixel array/matrix/vector in parallel and then write to the file sequentially.
         os << "P3\n" << image_width << " " << image_height << "\n255\n";
         for(int y = 0; y < image_height; y++){
             std::clog << "\rScanlines remaining: " << (image_height - y) << ' ' << std::flush;
