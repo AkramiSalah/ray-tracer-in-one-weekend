@@ -1,3 +1,4 @@
+#pragma once
 #include "Hittable.h"
 #include "../03_vector/Vec3.h"
 #include "../Float.h"
@@ -19,9 +20,9 @@ public:
         auto sqrtd = std::sqrt(discriminant);
 
         auto root = (h - sqrtd)/a;
-        if (!ray_t.contains(root)){
+        if (!ray_t.surrounds(root)){
             root = (h + sqrtd)/a;
-            if(!ray_t.contains(root)){
+            if(!ray_t.surrounds(root)){
                 return false;
             }
         }

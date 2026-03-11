@@ -1,3 +1,4 @@
+#pragma once
 #include "../Float.h"
 #include "../04_Rays_Camera_Background/Ray.h"
 #include "Interval.h"
