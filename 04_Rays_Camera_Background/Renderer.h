@@ -3,6 +3,7 @@
 #include "Ray.h"
 #include "../03_vector/Color.h"
 #include "../Float.h"
+#include "CONSTANTS.h"
 #include <iostream>
 
 class Renderer{
@@ -16,6 +17,10 @@ public:
             Float(image_width)/Float(image_height)
         )
     {}
+
+    Renderer(unsigned int image_size, Float focal_length) : Renderer(image_size, image_size, focal_length){}
+
+    Renderer() : Renderer(DEFAULT_IMAGE_SIZE, DEFAULT_FOCAL_LENGTH){}
 
     void render(std::ostream& os) const{
         os << "P3\n" << image_width << " " << image_height << "\n255\n";
