@@ -2,6 +2,9 @@
 #include "../04_Rays_Camera_Background/Ray.h"
 #include "Interval.h"
 
+// Ray Equation
+// P(t) = A + tB A is the origin, B is dir vector, t is scalar
+
 struct HitRecord{
     Point3 p;
     Vec3 normal;
